@@ -46,19 +46,20 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
-    // Compare the entered password with the hashed one
+    // Compare the entered password with the hashed password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
     // Create a JWT token
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: '1h',
     });
 
-    res.json({ token, user });
+    res.status(200).json({ token, user });
   } catch (error) {
+    console.error('Error during login:', error); // Add detailed logging
     res.status(500).json({ message: 'Server error' });
   }
 };
