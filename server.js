@@ -7,12 +7,6 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 
-const passport = require('passport');
-require('./passport-setup'); // Adjust path as needed
-
-app.use(passport.initialize());
-app.use(passport.session());
-
 // Middleware
 app.use(express.json());
 app.use(cors());
