@@ -15,7 +15,7 @@ router.get(
   passport.authenticate('google', { failureRedirect: '/login' }),
   (req, res) => {
     const token = jwt.sign({ id: req.user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.redirect(`/login?token=${token}`);
+    res.redirect(`https://glowing-gingersnap-7d81f6.netlify.app/#home?token=${token}`);
   }
 );
 
